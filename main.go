@@ -2,9 +2,30 @@ package main
 
 import "github.com/gin-gonic/gin"
 
+type Userstruct struct{
+
+	Name string
+	Login string
+	Password string
+}
+
+var UserSlice =[]Userstruct{}
+
 func main() {
 	r := gin.Default()
-r.POST("/ger")
-r.Run(":1212")
+	r.POST("/getuser")
+	r.GET("/list")
+	r.Run(":1212")
 
+}
+func Signin(c *gin.Context)  {
+	var rrr Userstruct
+	c.ShouldBindJSON(&rrr)
+	
+	if rrr.Login==""||rrr.Name==""{
+		c.JSON(404,"errreo")
+	}else{
+		UserSlice = append(UserSlice, rrr)
+		c.JSON(200,"success")
+	}
 }

@@ -12,11 +12,15 @@ type Userstruct struct{
 var UserSlice =[]Userstruct{}
 
 func main() {
-	r := gin.Default()
-	r.POST("/getuser")
-	r.GET("/list")
-	r.Run(":1212")
 
+r := gin.Default()
+r.POST("/getuser")
+r.GET("/list",ListUser)
+r.Run(":1212")
+
+}
+func ListUser(c *gin.Context)  {
+	c.JSON(200,"hello")
 }
 func Signin(c *gin.Context)  {
 	var rrr Userstruct
@@ -28,4 +32,5 @@ func Signin(c *gin.Context)  {
 		UserSlice = append(UserSlice, rrr)
 		c.JSON(200,"success")
 	}
+
 }
